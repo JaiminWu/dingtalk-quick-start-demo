@@ -12,6 +12,7 @@ import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -41,7 +42,8 @@ public class IndexController {
     @ResponseBody
     public ServiceResult login(@RequestParam(value = "authCode") String requestAuthCode) {
         //获取accessToken,注意正是代码要有异常流处理
-        String accessToken = AccessTokenUtil.getToken();
+        AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
+        String accessToken = accessTokenUtil.getToken();
 
         //获取用户信息
         DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_GET_USER_INFO);
@@ -61,6 +63,7 @@ public class IndexController {
         String userId = response.getUserid();
 
         String userName = getUserName(accessToken, userId);
+
         System.out.println(userName);
         //返回结果
         Map<String, Object> resultMap = new HashMap<>();
