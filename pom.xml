@@ -65,11 +65,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.taobao.top</groupId>
-			<artifactId>top-api-sdk-dev</artifactId>
-			<version>ding-open-mc-SNAPSHOT</version>
+			<groupId>com.aliyun</groupId>
+			<artifactId>alibaba-dingtalk-service-sdk</artifactId>
+			<version>1.0.1</version>
 			<scope>system</scope>
-			<systemPath>${pom.basedir}/lib/top-api-sdk-dev-ding-open-mc-20180719.091043-1.jar</systemPath>
+			<systemPath>${pom.basedir}/lib/taobao-sdk-java-auto_1479188381469-20201123.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -95,14 +95,6 @@
 				<configuration>
 					<includeSystemScope>true</includeSystemScope>
 				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-	                <fork>true</fork>
-	            </configuration>
 			</plugin>
 		</plugins>
 	</build>

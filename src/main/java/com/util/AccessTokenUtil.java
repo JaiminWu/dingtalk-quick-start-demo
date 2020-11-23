@@ -36,6 +36,7 @@ public class AccessTokenUtil {
 //            request.setAppsecret(applicationConfiguration.APP_SECRET);
             request.setHttpMethod("GET");
             OapiGettokenResponse response = client.execute(request);
+            System.out.println("Access_Token: " + response.getAccessToken());
             return response.getAccessToken();
         } catch (ApiException e) {
             bizLogger.error("getAccessToken failed", e);

@@ -17,4 +17,8 @@ public class URLConstant {
     public static final String URL_USER_GET = "https://oapi.dingtalk.com/user/get";
 
     public static final String URL_CREATE_PROCESS_INSTANCE = "https://oapi.dingtalk.com/topapi/processinstance/create";
+
+    public static final String URL_CREATE_WORK_RECORD = "https://oapi.dingtalk.com/topapi/workrecord/add";
+
+
 }
