@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.At;
+import com.pojo.BotMessage;
 import com.pojo.Text;
 import com.pojo.TextResponse;
 
@@ -9,10 +10,10 @@ import java.util.List;
 
 public class ResponseText {
 
-    public static TextResponse test () {
+    public static TextResponse test (BotMessage botMessage) {
 
         Text text = new Text();
-        text.setContent("This is a text");
+        text.setContent("你刚刚发给我的消息是：\"" + botMessage.getText().getContent() + "\"/n 机器人维护工程师是@18819253238");
 
         At at = new At();
         at.setIsAtAll(false);

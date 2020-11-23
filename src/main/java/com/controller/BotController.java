@@ -23,6 +23,6 @@ public class BotController {
     @RequestMapping(value = "/bot/receive", method = RequestMethod.POST)
     public TextResponse receive(@RequestBody BotMessage botMessage, @RequestHeader("timestamp") String timestamp, @RequestHeader("sign") String sign) throws InvalidKeyException, NoSuchAlgorithmException, HttpResponseException, UnsupportedEncodingException {
             VerifySign.verify(timestamp, sign);
-            return ResponseText.test();
+            return ResponseText.test(botMessage);
     }
 }
