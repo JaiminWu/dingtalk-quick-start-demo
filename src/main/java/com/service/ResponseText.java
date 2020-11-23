@@ -13,7 +13,7 @@ public class ResponseText {
     public static TextResponse test (BotMessage botMessage) {
 
         Text text = new Text();
-        text.setContent("你刚刚发给我的消息是：\"" + botMessage.getText().getContent() + "\"/n 机器人维护工程师是@18819253238");
+        text.setContent("你刚刚发给我的消息是：\"" + botMessage.getText().getContent() + "\" 机器人维护工程师是: @18819253238");
 
         At at = new At();
         at.setIsAtAll(false);
