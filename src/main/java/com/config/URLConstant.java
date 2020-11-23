@@ -20,5 +20,7 @@ public class URLConstant {
 
     public static final String URL_CREATE_WORK_RECORD = "https://oapi.dingtalk.com/topapi/workrecord/add";
 
+    public static final String DING_TALK_BOT_WEBHOOK = "https://oapi.dingtalk.com/robot/send?access_token=ffdd3449723375adfb7ec25729926155026318efefed50048749118433195b89";
+
 
 }

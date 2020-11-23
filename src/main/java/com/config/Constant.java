@@ -15,4 +15,10 @@ public class Constant {
     public static final String APP_SECRET="73Gj2SreZjHWgpJ0GP2ku1WLli3icLUhLeGH6g-uGp32eM6MLz2fZy6j1r5OEYV8";
 
     public static final Long AGENT_ID = 1011112674L;
+
+    public static final Long BOT_AGENT_ID = 3929003L;
+
+    public static final String BOT_APP_KEY = "dingzxgvknkloginvbos";
+
+    public static final String BOT_APP_SECRET = "XNR0kIFTg6qsvzNU4nuyQNdZIwOQ0Lt3unoYg2cOuL14Rgui6NHBXTwYOtEb4MED";
 }
