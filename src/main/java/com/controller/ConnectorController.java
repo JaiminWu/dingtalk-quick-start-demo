@@ -20,7 +20,7 @@ public class ConnectorController {
         return ServiceResult.success(SFConnector.testQueryCustomerVisit(id));
     }
 
-    @RequestMapping(value = "/connector/submit", method = RequestMethod.GET)
+    @RequestMapping(value = "/connector/submit", method = RequestMethod.POST)
     public ServiceResult whenSubmit() {
         CustomerVisit customerVisit = new CustomerVisit().testObject();
 //        customerVisit = customerVisit.testObject();
