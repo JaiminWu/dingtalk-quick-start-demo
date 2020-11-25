@@ -17,19 +17,22 @@ public class ConnectorController {
 
     @RequestMapping(value = "/connector/query", method = RequestMethod.GET)
     public ServiceResult whenLoaded(@RequestParam(value = "id") String id) {
-        return ServiceResult.success(SFConnector.testQueryCustomerVisit(id));
+        SFConnector sfConnector = new SFConnector();
+        return ServiceResult.success(sfConnector.testQueryCustomerVisit(id));
     }
 
     @RequestMapping(value = "/connector/submit", method = RequestMethod.POST)
     public ServiceResult whenSubmit() {
+        SFConnector sfConnector = new SFConnector();
         CustomerVisit customerVisit = new CustomerVisit().testObject();
 //        customerVisit = customerVisit.testObject();
-        return ServiceResult.success(SFConnector.testCreateCustomerVisit(customerVisit));
+        return ServiceResult.success(sfConnector.testCreateCustomerVisit(customerVisit));
     }
 
     @RequestMapping(value = "/connector/validate", method = RequestMethod.GET)
     public ServiceResult whenValidate(@RequestParam(value = "id") String id) {
-        return ServiceResult.success(SFConnector.testQueryCustomerVisit(id));
+        SFConnector sfConnector = new SFConnector();
+        return ServiceResult.success(sfConnector.testQueryCustomerVisit(id));
     }
 
 }
