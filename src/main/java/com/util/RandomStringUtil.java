@@ -8,10 +8,10 @@ public class RandomStringUtil {
      * @return
      */
     public static String getRandomString(int stringLength) {
-        String string = "abcdefghijklmnopqrstuvwxyz";
+        String string = "abcdefghijklmnopqrstuvwxyz1234567890";
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < stringLength; i++) {
-            //向下取整0-25
+            //向下取整0-35
             int index = (int) Math.floor(Math.random() * string.length());
             sb.append(string.charAt(index));
         }

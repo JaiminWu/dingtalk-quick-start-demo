@@ -13,6 +13,7 @@ import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
+import com.util.UserInfoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,7 +65,7 @@ public class IndexController {
         // 获得到userId之后应用应该处理应用自身的登录会话管理（session）,避免后续的业务交互（前端到应用服务端）每次都要重新获取用户身份，提升用户体验
         String userId = response.getUserid();
 
-        String userName = getUserName(accessToken, userId);
+        String userName = UserInfoUtil.getUserName(accessToken, userId);
 
         System.out.println(userName);
         //返回结果
@@ -75,39 +76,39 @@ public class IndexController {
         return serviceResult;
     }
 
-    @RequestMapping(value = "/submitApproval", method = RequestMethod.POST)
-    @ResponseBody
-    public ServiceResult submitApproval (@RequestParam(value = "userId") String userId) {
-        AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
-        String accessToken = accessTokenUtil.getToken();
-        DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_CREATE_PROCESS_INSTANCE);
-        OapiProcessinstanceCreateRequest req = new OapiProcessinstanceCreateRequest();
-        req.setAgentId(Constant.AGENT_ID);
-        req.setProcessCode("PROC-938EC5CD-9332-4BF3-935A-161A868F894B");
-        req.setOriginatorUserId(userId);
-        req.setDeptId(-1L);
-        req.setApprovers(userId);
-        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = new ArrayList<OapiProcessinstanceCreateRequest.FormComponentValueVo>();
-        OapiProcessinstanceCreateRequest.FormComponentValueVo obj3 = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
-        list2.add(obj3);
-        obj3.setName("Test");
-        String userName = getUserName(accessToken, userId);
-        obj3.setValue("Test by user: " + userName);
-        req.setFormComponentValues(list2);
-        OapiProcessinstanceCreateResponse rsp = new OapiProcessinstanceCreateResponse();
-        try {
-            rsp = client.execute(req, accessToken);
-            System.out.println(rsp.getBody());
-        } catch (ApiException e) {
-            e.printStackTrace();
-        }
-        String processInstanceId = rsp.getProcessInstanceId();
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("processInstanceId", processInstanceId);
-        resultMap.put("userName", userName);
-        return ServiceResult.success(resultMap);
-
-    }
+//    @RequestMapping(value = "/submitApproval", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ServiceResult submitApproval (@RequestParam(value = "userId") String userId) {
+//        AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
+//        String accessToken = accessTokenUtil.getToken();
+//        DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_CREATE_PROCESS_INSTANCE);
+//        OapiProcessinstanceCreateRequest req = new OapiProcessinstanceCreateRequest();
+//        req.setAgentId(Constant.AGENT_ID);
+//        req.setProcessCode("PROC-938EC5CD-9332-4BF3-935A-161A868F894B");
+//        req.setOriginatorUserId(userId);
+//        req.setDeptId(-1L);
+//        req.setApprovers(userId);
+//        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = new ArrayList<OapiProcessinstanceCreateRequest.FormComponentValueVo>();
+//        OapiProcessinstanceCreateRequest.FormComponentValueVo obj3 = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
+//        list2.add(obj3);
+//        obj3.setName("Test");
+//        String userName = UserInfoUtil.getUserName(accessToken, userId);
+//        obj3.setValue("Test by user: " + userName);
+//        req.setFormComponentValues(list2);
+//        OapiProcessinstanceCreateResponse rsp = new OapiProcessinstanceCreateResponse();
+//        try {
+//            rsp = client.execute(req, accessToken);
+//            System.out.println(rsp.getBody());
+//        } catch (ApiException e) {
+//            e.printStackTrace();
+//        }
+//        String processInstanceId = rsp.getProcessInstanceId();
+//        Map<String, Object> resultMap = new HashMap<>();
+//        resultMap.put("processInstanceId", processInstanceId);
+//        resultMap.put("userName", userName);
+//        return ServiceResult.success(resultMap);
+//
+//    }
 
     /**
      * 获取用户姓名
@@ -116,19 +117,19 @@ public class IndexController {
      * @param userId
      * @return
      */
-    private String getUserName(String accessToken, String userId) {
-        try {
-            DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_USER_GET);
-            OapiUserGetRequest request = new OapiUserGetRequest();
-            request.setUserid(userId);
-            request.setHttpMethod("GET");
-            OapiUserGetResponse response = client.execute(request, accessToken);
-            return response.getName();
-        } catch (ApiException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    private String getUserName(String accessToken, String userId) {
+//        try {
+//            DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_USER_GET);
+//            OapiUserGetRequest request = new OapiUserGetRequest();
+//            request.setUserid(userId);
+//            request.setHttpMethod("GET");
+//            OapiUserGetResponse response = client.execute(request, accessToken);
+//            return response.getName();
+//        } catch (ApiException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
 }
 

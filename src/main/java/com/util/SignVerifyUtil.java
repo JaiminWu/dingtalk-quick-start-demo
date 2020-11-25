@@ -3,6 +3,8 @@ package com.util;
 import com.config.Constant;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.client.HttpResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.crypto.Mac;
@@ -12,6 +14,9 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 public class SignVerifyUtil {
+
+    private static final Logger bizLogger = LoggerFactory.getLogger(AccessTokenUtil.class);
+
 
     public static boolean verifySign(String timestamp, String sign) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
 //        Long timestamp = 1577262236757L;
