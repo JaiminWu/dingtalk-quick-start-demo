@@ -25,6 +25,8 @@ public class CustomerVisit {
     //钉Talk userName
     private String userName;
 
+    private String status;
+
     public String getCustomerVisitId() {
         return customerVisitId;
     }
@@ -97,13 +99,21 @@ public class CustomerVisit {
         this.userName = userName;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public CustomerVisit testObject() {
         CustomerVisit customerVisit = new CustomerVisit();
 //        customerVisit.customerVisitId = "id"+ RandomStringUtil.getRandomString(15);
         customerVisit.accountName = "Test Account";
         customerVisit.address = "Test Address";
         customerVisit.contactName = "Test Contact Name";
-        customerVisit.dueTime = new DateTime(2020, 12, 5, 0, 0, 0).toString();
+        customerVisit.dueTime = new DateTime(2020, 12, 5, 0, 0, 0).toString("MM/dd/yyyy HH:mm");
         customerVisit.userId = "id" + RandomStringUtil.getRandomString(15);
         customerVisit.userName = "Test User";
         customerVisit.visitSummary = "Test summary";
