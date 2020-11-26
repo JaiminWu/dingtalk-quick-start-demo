@@ -26,6 +26,7 @@ public class ConnectorController {
         SFConnector sfConnector = new SFConnector();
         CustomerVisit customerVisit = new CustomerVisit().testObject();
 //        customerVisit = customerVisit.testObject();
+        System.out.println("Received a process create request");
         return ServiceResult.success(sfConnector.testCreateCustomerVisit(customerVisit));
     }
 
