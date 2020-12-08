@@ -91,6 +91,13 @@ public class IndexController {
 //        }
 //    }
 
+    @RequestMapping(value = "/accesstoken", method = RequestMethod.GET)
+    @ResponseBody
+    public String serverAccessToken() {
+        AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
+        return accessTokenUtil.getToken();
+    }
+
     public void main(){
     }
 
