@@ -6,6 +6,7 @@ import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiProcessinstanceCreateRequest;
 import com.dingtalk.api.response.OapiProcessinstanceCreateResponse;
+import com.pojo.User;
 import com.service.ProcessTest;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
@@ -13,10 +14,7 @@ import com.util.ServiceResult;
 import com.util.UserInfoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,17 +30,17 @@ public class ProcessController {
     private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
 
     @RequestMapping(value = "/process/add", method = RequestMethod.POST)
-    public ServiceResult processAdd (@RequestParam(value = "userId") String userId) {
+    public ServiceResult processAdd (@RequestBody User user) {
         AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
         String accessToken = accessTokenUtil.getToken();
-        String userName = UserInfoUtil.getUserName(accessToken, userId);
+        String userName = UserInfoUtil.getUserName(accessToken, user.getUserId());
         DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_CREATE_PROCESS_INSTANCE);
         OapiProcessinstanceCreateRequest req = new OapiProcessinstanceCreateRequest();
         req.setAgentId(Constant.AGENT_ID);
         req.setProcessCode(Constant.TEST_PROCESS_CODE);
-        req.setOriginatorUserId(userId);
+        req.setOriginatorUserId(user.getUserId());
         req.setDeptId(1L);
-        req.setApprovers(userId);
+        req.setApprovers(user.getUserId());
 //        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = new ArrayList<OapiProcessinstanceCreateRequest.FormComponentValueVo>();
 //        OapiProcessinstanceCreateRequest.FormComponentValueVo obj3 = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
 //        list2.add(obj3);
