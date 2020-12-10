@@ -31,7 +31,7 @@ public class ProcessController {
     private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
 
     @RequestMapping(value = "/process/add", method = RequestMethod.POST)
-    public ServiceResult processAdd (@RequestBody ProcessRequest processRequest) {
+    public ServiceResult processAdd (@RequestBody ProcessRequest processRequest, @RequestParam(value = "approvalId", required = false) String approvalId) {
         AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
         String accessToken = accessTokenUtil.getToken();
         String userName = UserInfoUtil.getUserName(accessToken, processRequest.getOriginatorUserId());
@@ -62,7 +62,12 @@ public class ProcessController {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("processInstanceId", processInstanceId);
         resultMap.put("userName", userName);
+        if (null != approvalId) {
+            resultMap.put("approvalId", approvalId);
+        }
         return ServiceResult.success(resultMap);
     }
+
+
 
 }
