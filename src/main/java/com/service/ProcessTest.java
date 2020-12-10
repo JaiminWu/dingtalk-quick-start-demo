@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ProcessTest {
 
+    //Test Smart Flow
     public static List<OapiProcessinstanceCreateRequest.FormComponentValueVo> test1() {
 
         OapiProcessinstanceCreateRequest.FormComponentValueVo vo = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
@@ -57,6 +58,22 @@ public class ProcessTest {
 //        list.add(vo5);
         list.add(vo6);
 //        list.add(vo7);
+        return list;
+    }
+
+    //DingTalk&Salesforce Integration POC
+    public static List<OapiProcessinstanceCreateRequest.FormComponentValueVo> test2() {
+        OapiProcessinstanceCreateRequest.FormComponentValueVo vo = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
+        vo.setName("审批名称");
+        vo.setValue("Test");
+
+        OapiProcessinstanceCreateRequest.FormComponentValueVo vo1 = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
+        vo1.setName("描述");
+        vo1.setValue("Test");
+
+        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list = new ArrayList<OapiProcessinstanceCreateRequest.FormComponentValueVo>();
+        list.add(vo);
+        list.add(vo1);
         return list;
     }
 }

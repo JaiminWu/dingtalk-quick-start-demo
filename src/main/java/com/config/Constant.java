@@ -19,7 +19,8 @@ public class Constant {
     public static final String APP_SECRET="eDoopoeAe4Lk7H2opj79y3z5kk0WqwVZFUxgGiUi393Cri_pAEGY7An-XJM_wQsW";
 
     //钉钉集成服务体验组织
-    public static final String TEST_PROCESS_CODE = "PROC-6FF6021B-E343-430B-A317-9D175ECCFEA5";
+    //public static final String TEST_PROCESS_CODE = "PROC-6FF6021B-E343-430B-A317-9D175ECCFEA5";
+    public static final String TEST_PROCESS_CODE = "PROC-ECFF866D-31A5-4A33-8C6A-F0085500F08C";
 
 
     //我们自己的应用

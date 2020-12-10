@@ -46,7 +46,8 @@ public class ProcessController {
 //        list2.add(obj3);
 //        obj3.setName("Test");
 //        obj3.setValue("Test by user: " + userName);
-        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = ProcessTest.test1();
+//        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = ProcessTest.test1();
+        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = ProcessTest.test2();
         req.setFormComponentValues(list2);
         OapiProcessinstanceCreateResponse rsp = new OapiProcessinstanceCreateResponse();
         try {
