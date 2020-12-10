@@ -68,6 +68,11 @@ public class ProcessController {
         return ServiceResult.success(resultMap);
     }
 
+    @RequestMapping(value = "/process/update", method = RequestMethod.POST)
+    public String processUpdate(@RequestParam(value = "processId") String processId, @RequestParam(value = "status") String status) {
+        System.out.println(processId);
+    }
+
 
 
 }
