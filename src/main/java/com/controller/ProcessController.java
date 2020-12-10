@@ -75,6 +75,7 @@ public class ProcessController {
     @RequestMapping(value = "/process/update", method = RequestMethod.POST)
     public void processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) throws Exception {
         RestfulSalesforceClient client = new RestfulSalesforceClient();
+        client.setApiVersion("v50.0");
         DingTalkApprovalUpdateRequest request = new DingTalkApprovalUpdateRequest();
         request.setComment(updateProcessStatus.getComment());
         request.setStatus(convertStatus(updateProcessStatus.getStatus()));
