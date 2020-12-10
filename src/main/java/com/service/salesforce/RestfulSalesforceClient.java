@@ -81,7 +81,8 @@ public class RestfulSalesforceClient implements SalesforceClient {
         final CloseableHttpClient httpclient = HttpClients.createDefault();
         final HttpResponse queryResponse = httpclient.execute(httpGet);
         HttpEntity entity = queryResponse.getEntity();
-        return EntityUtils.toString(entity);
+        String queryResult = EntityUtils.toString(entity);
+        return queryResult.substring(1, queryResult.length()-1);
     }
 
     private JsonNode getAccessToken() throws IOException {
