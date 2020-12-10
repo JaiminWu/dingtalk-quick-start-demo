@@ -10,6 +10,9 @@ import com.pojo.ProcessRequest;
 import com.pojo.UpdateProcessStatus;
 import com.pojo.User;
 import com.service.ProcessTest;
+import com.service.salesforce.RestfulSalesforceClient;
+import com.service.salesforce.SalesforceClient;
+import com.service.salesforce.request.DingTalkApprovalUpdateRequest;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
@@ -70,9 +73,25 @@ public class ProcessController {
     }
 
     @RequestMapping(value = "/process/update", method = RequestMethod.POST)
-    public String processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) {
-        System.out.println(updateProcessStatus.getProcessId());
-        return updateProcessStatus.getProcessId();
+    public void processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) throws Exception {
+        RestfulSalesforceClient client = new RestfulSalesforceClient();
+        DingTalkApprovalUpdateRequest request = new DingTalkApprovalUpdateRequest();
+        request.setComment(updateProcessStatus.getComment());
+        request.setStatus(convertStatus(updateProcessStatus.getStatus()));
+        request.setsObjectId(updateProcessStatus.getProcessId());
+        request.setsObjectName("Dingtalk_Approval__c");
+        client.execute(request);
+    }
+
+    public String convertStatus(String dingTalkStatus) {
+        switch (dingTalkStatus) {
+            case "agree" :
+                return "Approved";
+            case "refuse" :
+                return "Denied";
+            default:
+                return "Open";
+        }
     }
 
 
