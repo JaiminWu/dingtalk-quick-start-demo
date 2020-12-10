@@ -7,6 +7,7 @@ import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiProcessinstanceCreateRequest;
 import com.dingtalk.api.response.OapiProcessinstanceCreateResponse;
 import com.pojo.ProcessRequest;
+import com.pojo.UpdateProcessStatus;
 import com.pojo.User;
 import com.service.ProcessTest;
 import com.taobao.api.ApiException;
@@ -69,9 +70,9 @@ public class ProcessController {
     }
 
     @RequestMapping(value = "/process/update", method = RequestMethod.POST)
-    public String processUpdate(@RequestParam(value = "processId") String processId, @RequestParam(value = "status") String status) {
-        System.out.println(processId);
-        return processId;
+    public String processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) {
+        System.out.println(updateProcessStatus.getProcessId());
+        return updateProcessStatus.getProcessId();
     }
 
 
