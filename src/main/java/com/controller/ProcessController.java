@@ -13,6 +13,7 @@ import com.service.ProcessTest;
 import com.service.salesforce.RestfulSalesforceClient;
 import com.service.salesforce.SalesforceClient;
 import com.service.salesforce.request.DingTalkApprovalUpdateRequest;
+import com.service.salesforce.request.GetSalesforceApprovalIDRequest;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,12 +78,27 @@ public class ProcessController {
     public void processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) throws Exception {
         RestfulSalesforceClient client = new RestfulSalesforceClient();
         client.setApiVersion("v50.0");
+        //获取Salesforce Approval Id
+        GetSalesforceApprovalIDRequest queryRequest = new GetSalesforceApprovalIDRequest();
+        queryRequest.setProcessId(updateProcessStatus.getProcessId());
+        String salesforceApprovalId = client.query(queryRequest);
+        //更新Salesforce Approval 内容
         DingTalkApprovalUpdateRequest request = new DingTalkApprovalUpdateRequest();
         request.setComment(updateProcessStatus.getComment());
         request.setStatus(convertStatus(updateProcessStatus.getStatus()));
-        request.setsObjectId(updateProcessStatus.getProcessId());
+        request.setsObjectId(salesforceApprovalId);
         request.setsObjectName("Dingtalk_Approval__c");
         client.execute(request);
+    }
+
+    @RequestMapping(value = "/process/query", method = RequestMethod.GET)
+    public String processQuery() throws IOException {
+        RestfulSalesforceClient client = new RestfulSalesforceClient();
+        GetSalesforceApprovalIDRequest request = new GetSalesforceApprovalIDRequest();
+        request.setProcessId("385ea15c-df12-4cbc-89d1-b1668b9ef188");
+        String response = client.query(request);
+        System.out.println(response);
+        return response;
     }
 
     public String convertStatus(String dingTalkStatus) {

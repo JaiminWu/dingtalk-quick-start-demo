@@ -6,16 +6,19 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.service.salesforce.request.BaseSalesforceRequest;
 import com.service.salesforce.request.SalesforceRequest;
 import com.service.salesforce.response.SalesforceResponse;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,6 +30,7 @@ public class RestfulSalesforceClient implements SalesforceClient {
     private String instanceUrl;
     private String apiVersion;
     protected String urlPath;
+    protected String restUrlPath;
 
     public String getInstanceUrl() {
         return instanceUrl;
@@ -48,15 +52,15 @@ public class RestfulSalesforceClient implements SalesforceClient {
         return instanceUrl + "/services/data/" + apiVersion + "/sobjects";
     }
 
+    public String restUrlPath(){
+        return instanceUrl + "/services/apexrest/";
+    }
+
     public void execute(BaseSalesforceRequest request) throws Exception {
         final JsonNode loginResult = getAccessToken();
         final String accessToken = loginResult.get("access_token").asText();
         instanceUrl = loginResult.get("instance_url").asText();
-        //
-        System.out.println("sf accesstoken: " + accessToken);
         final HttpPatch httpPatch = new HttpPatch(urlPath() + request.getResourceUrl());
-        //
-        System.out.println("url: " + urlPath() + request.getResourceUrl());
         httpPatch.setHeader("Authorization", "Bearer " + accessToken);
         StringEntity entity = new StringEntity(request.toString());
         httpPatch.setEntity(entity);
@@ -65,6 +69,19 @@ public class RestfulSalesforceClient implements SalesforceClient {
         final CloseableHttpClient httpclient = HttpClients.createDefault();
         httpclient.execute(httpPatch);
 
+    }
+
+    public String query(BaseSalesforceRequest request) throws IOException {
+        final JsonNode loginResult = getAccessToken();
+        final String accessToken = loginResult.get("access_token").asText();
+        instanceUrl = loginResult.get("instance_url").asText();
+        final HttpGet httpGet = new HttpGet(restUrlPath() + request.getResourceUrl());
+        httpGet.setHeader("Authorization", "Bearer " + accessToken);
+        httpGet.setHeader("Accept", "application/json");
+        final CloseableHttpClient httpclient = HttpClients.createDefault();
+        final HttpResponse queryResponse = httpclient.execute(httpGet);
+        HttpEntity entity = queryResponse.getEntity();
+        return EntityUtils.toString(entity);
     }
 
     private JsonNode getAccessToken() throws IOException {
