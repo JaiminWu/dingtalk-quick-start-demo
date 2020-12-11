@@ -82,8 +82,7 @@ public class RestfulSalesforceClient implements SalesforceClient {
         HttpEntity entity = queryResponse.getEntity();
         String queryResult = EntityUtils.toString(entity);
         //判断返回结果是否为空
-        return queryResult == null ? null : queryResult.substring(1, queryResult.length()-1);
-//        return queryResult.substring(1, queryResult.length()-1);
+        return queryResult.length() == 0 ? null : queryResult.substring(1, queryResult.length()-1);
     }
 
     private JsonNode getAccessToken() throws IOException {

@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +90,17 @@ public class ProcessController {
         request.setsObjectName("Dingtalk_Approval__c");
         client.update(request);
     }
+
+//    @RequestMapping(value = "/process/test", method = RequestMethod.GET)
+//    public void processTest() throws IOException {
+//        RestfulSalesforceClient client = new RestfulSalesforceClient();
+//        client.setApiVersion("v50.0");
+//        //获取Salesforce Approval Id
+//        GetSalesforceApprovalIDRequest queryRequest = new GetSalesforceApprovalIDRequest();
+//        queryRequest.setProcessId("testsdada");
+//        String salesforceApprovalId = client.query(queryRequest);
+//        System.out.println(salesforceApprovalId);
+//    }
 
 
     public String convertStatus(String dingTalkStatus) {
