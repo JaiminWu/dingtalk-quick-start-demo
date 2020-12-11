@@ -56,7 +56,7 @@ public class RestfulSalesforceClient implements SalesforceClient {
         return instanceUrl + "/services/apexrest/";
     }
 
-    public void execute(BaseSalesforceRequest request) throws Exception {
+    public void update(BaseSalesforceRequest request) throws Exception {
         final JsonNode loginResult = getAccessToken();
         final String accessToken = loginResult.get("access_token").asText();
         instanceUrl = loginResult.get("instance_url").asText();
@@ -68,7 +68,6 @@ public class RestfulSalesforceClient implements SalesforceClient {
         httpPatch.setHeader("Content-type", "application/json");
         final CloseableHttpClient httpclient = HttpClients.createDefault();
         httpclient.execute(httpPatch);
-
     }
 
     public String query(BaseSalesforceRequest request) throws IOException {
@@ -82,7 +81,9 @@ public class RestfulSalesforceClient implements SalesforceClient {
         final HttpResponse queryResponse = httpclient.execute(httpGet);
         HttpEntity entity = queryResponse.getEntity();
         String queryResult = EntityUtils.toString(entity);
-        return queryResult.substring(1, queryResult.length()-1);
+        //判断返回结果是否为空
+        return queryResult == null ? null : queryResult.substring(1, queryResult.length()-1);
+//        return queryResult.substring(1, queryResult.length()-1);
     }
 
     private JsonNode getAccessToken() throws IOException {

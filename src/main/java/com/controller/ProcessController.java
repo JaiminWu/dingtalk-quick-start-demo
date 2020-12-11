@@ -72,21 +72,22 @@ public class ProcessController {
     public void processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) throws Exception {
         RestfulSalesforceClient client = new RestfulSalesforceClient();
         client.setApiVersion("v50.0");
-        //调试连接器
-        System.out.println("ProcessId: " + updateProcessStatus.getProcessId());
-        System.out.println("ProcessId: " + updateProcessStatus.getComment());
-        System.out.println("ProcessId: " + updateProcessStatus.getStatus());
         //获取Salesforce Approval Id
         GetSalesforceApprovalIDRequest queryRequest = new GetSalesforceApprovalIDRequest();
         queryRequest.setProcessId(updateProcessStatus.getProcessId());
         String salesforceApprovalId = client.query(queryRequest);
+        if (null == salesforceApprovalId) {
+            //调试连接器
+            System.out.println("Can't find salesforce approval ID for ProcessId:" + updateProcessStatus.getProcessId());
+            return;
+        }
         //更新Salesforce Approval 状态 -> 对应Approval Id
         DingTalkApprovalUpdateRequest request = new DingTalkApprovalUpdateRequest();
         request.setComment(updateProcessStatus.getComment());
         request.setStatus(convertStatus(updateProcessStatus.getStatus()));
         request.setsObjectId(salesforceApprovalId);
         request.setsObjectName("Dingtalk_Approval__c");
-        client.execute(request);
+        client.update(request);
     }
 
 
