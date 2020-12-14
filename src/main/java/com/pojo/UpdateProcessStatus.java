@@ -8,6 +8,16 @@ public class UpdateProcessStatus {
 
     private String comment;
 
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     public String getProcessId() {
         return processId;
     }
