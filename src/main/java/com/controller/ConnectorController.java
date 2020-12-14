@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConnectorController {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(ConnectorController.class);
 
     @RequestMapping(value = "/connector/query", method = RequestMethod.GET)
     public ServiceResult whenLoaded(@RequestParam(value = "id") String id) {

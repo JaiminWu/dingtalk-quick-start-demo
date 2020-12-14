@@ -29,7 +29,7 @@ import java.util.Map;
 @RestController
 public class ProcessController {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(ProcessController.class);
 
     @RequestMapping(value = "/process/add", method = RequestMethod.POST)
     public ServiceResult processAdd (@RequestBody ProcessRequest processRequest, @RequestParam(value = "approvalId", required = false) String approvalId) {
@@ -42,7 +42,7 @@ public class ProcessController {
         req.setProcessCode(processRequest.getProcessCode());
         req.setOriginatorUserId(processRequest.getOriginatorUserId());
         req.setDeptId(processRequest.getDeptId());
-        req.setApprovers(processRequest.getApprovers());
+//        req.setApprovers(processRequest.getApprovers());
 //        List<OapiProcessinstanceCreateRequest.FormComponentValueVo> list2 = new ArrayList<OapiProcessinstanceCreateRequest.FormComponentValueVo>();
 //        OapiProcessinstanceCreateRequest.FormComponentValueVo obj3 = new OapiProcessinstanceCreateRequest.FormComponentValueVo();
 //        list2.add(obj3);

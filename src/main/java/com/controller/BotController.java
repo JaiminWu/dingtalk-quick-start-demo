@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 @RestController
 public class BotController {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(BotController.class);
 
     @RequestMapping(value = "/bot/receive", method = RequestMethod.POST)
     public TextResponse receive(@RequestBody BotMessage botMessage, @RequestHeader("timestamp") String timestamp, @RequestHeader("sign") String sign) throws InvalidKeyException, NoSuchAlgorithmException, HttpResponseException, UnsupportedEncodingException {

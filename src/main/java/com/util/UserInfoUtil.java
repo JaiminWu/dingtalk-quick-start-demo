@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class UserInfoUtil {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(AccessTokenUtil.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(UserInfoUtil.class);
 
 
     /**

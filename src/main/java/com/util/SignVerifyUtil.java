@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SignVerifyUtil {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(AccessTokenUtil.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(SignVerifyUtil.class);
 
 
     public static boolean verifySign(String timestamp, String sign) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {

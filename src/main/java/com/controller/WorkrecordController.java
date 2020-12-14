@@ -19,7 +19,7 @@ import java.util.*;
 @RestController
 public class WorkrecordController {
 
-    private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger bizLogger = LoggerFactory.getLogger(WorkrecordController.class);
 
     @RequestMapping(value = "/workrecord/add", method = RequestMethod.POST)
     public ServiceResult createWorkRecord(@RequestBody User user) {
