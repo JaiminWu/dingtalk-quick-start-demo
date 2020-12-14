@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.config.Constant;
 import com.config.URLConstant;
 import com.dingtalk.api.DefaultDingTalkClient;
@@ -71,6 +72,7 @@ public class ProcessController {
 
     @RequestMapping(value = "/process/update", method = RequestMethod.POST)
     public void processUpdate(@RequestBody UpdateProcessStatus updateProcessStatus) throws Exception {
+        System.out.println(JSON.toJSON(updateProcessStatus));
         RestfulSalesforceClient client = new RestfulSalesforceClient();
         client.setApiVersion("v50.0");
         //获取Salesforce Approval Id
