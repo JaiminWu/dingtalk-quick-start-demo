@@ -7,6 +7,7 @@ import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiProcessinstanceCreateRequest;
 import com.dingtalk.api.response.OapiProcessinstanceCreateResponse;
+import com.pojo.Process;
 import com.pojo.ProcessRequest;
 import com.pojo.UpdateProcessStatus;
 import com.service.salesforce.RestfulSalesforceClient;
@@ -32,6 +33,7 @@ public class ProcessController {
 
     private static final Logger bizLogger = LoggerFactory.getLogger(ProcessController.class);
 
+    //create process in DingTalk
     @RequestMapping(value = "/process/add", method = RequestMethod.POST)
     public ServiceResult processAdd (@RequestBody ProcessRequest processRequest, @RequestParam(value = "approvalId", required = false) String approvalId) {
         AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
@@ -68,6 +70,12 @@ public class ProcessController {
             resultMap.put("approvalId", approvalId);
         }
         return ServiceResult.success(resultMap);
+    }
+
+    //create process in Salesforce
+    @RequestMapping(value = "/process/create", method = RequestMethod.POST)
+    public void processSyncFromDingTalkToSalesforce(@RequestBody Process process) {
+        System.out.println(JSON.toJSON(process));
     }
 
     @RequestMapping(value = "/process/update", method = RequestMethod.POST)
