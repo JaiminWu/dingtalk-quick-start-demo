@@ -106,6 +106,9 @@ public class ProcessController {
 
 
     public String convertStatus(String dingTalkStatus) {
+        //just for testing
+        dingTalkStatus = "agree";
+        //switcher
         switch (dingTalkStatus) {
             case "agree" :
                 return "Approved";
